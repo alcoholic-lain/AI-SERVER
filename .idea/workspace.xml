@@ -11,7 +11,18 @@
     </cargoProject>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29093918-f60b-406f-a32d-fb31f894088d" name="Changes" comment="we are cooking" />
+    <list default="true" id="29093918-f60b-406f-a32d-fb31f894088d" name="Changes" comment="we are cooking">
+      <change afterPath="$PROJECT_DIR$/src/data_base.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tools.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/tools.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ws_server.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/ws_server.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,14 +32,28 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Rust File" />
         <option value="HTML File" />
+        <option value="Rust File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;alcoholic-lain&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/alcoholic-lain/AI-SERVER.git&quot;,
+    &quot;accountId&quot;: &quot;7e634064-002d-4b8b-ab7c-5f372c3508a3&quot;
+  }
+}</component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="ju1Kzdke" />
   </component>
@@ -51,8 +76,10 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
+    "git-widget-placeholder": "master",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "C:/Users/ridha/Desktop/lain.exe/RUST/AI-SERVER",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -107,7 +134,9 @@
       <workItem from="1759226978475" duration="148000" />
       <workItem from="1765394574626" duration="5015000" />
       <workItem from="1765403265353" duration="95000" />
-      <workItem from="1765403580587" duration="209000" />
+      <workItem from="1765403580587" duration="2088000" />
+      <workItem from="1765407146275" duration="54000" />
+      <workItem from="1765407218574" duration="8908000" />
     </task>
     <task id="LOCAL-00001" summary="we are cooking">
       <option name="closed" value="true" />

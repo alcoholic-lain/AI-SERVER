@@ -1,5 +1,6 @@
 mod tools;
 mod ws_server;
+mod data_base;
 
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
@@ -44,12 +45,29 @@ fn format_tools_for_prompt() -> String {
     let tools = get_available_tools();
     let mut tool_descriptions = String::from("\n\nYou have access to the following tools:\n\n");
 
-    for tool in tools {
+    // Group tools by category
+    tool_descriptions.push_str("=== MATHEMATICAL TOOLS ===\n");
+    for tool in tools.iter().filter(|t| matches!(t.name.as_str(), "add" | "subtract" | "multiply" | "divide" | "power" | "sqrt")) {
         tool_descriptions.push_str(&format!("Tool: {}\n", tool.name));
         tool_descriptions.push_str(&format!("Description: {}\n", tool.description));
         tool_descriptions.push_str("Parameters:\n");
-        for param in tool.parameters {
+        for param in &tool.parameters {
             tool_descriptions.push_str(&format!("  - {} ({}): {}\n", param.name, param.param_type, param.description));
+        }
+        tool_descriptions.push_str("\n");
+    }
+
+    tool_descriptions.push_str("=== DATABASE TOOLS ===\n");
+    for tool in tools.iter().filter(|t| !matches!(t.name.as_str(), "add" | "subtract" | "multiply" | "divide" | "power" | "sqrt")) {
+        tool_descriptions.push_str(&format!("Tool: {}\n", tool.name));
+        tool_descriptions.push_str(&format!("Description: {}\n", tool.description));
+        tool_descriptions.push_str("Parameters:\n");
+        if tool.parameters.is_empty() {
+            tool_descriptions.push_str("  (no parameters)\n");
+        } else {
+            for param in &tool.parameters {
+                tool_descriptions.push_str(&format!("  - {} ({}): {}\n", param.name, param.param_type, param.description));
+            }
         }
         tool_descriptions.push_str("\n");
     }
@@ -288,7 +306,22 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let messages = Arc::new(Mutex::new(vec![Message {
         role: "system".to_string(),
-        content: format!("You are a helpful AI assistant with access to mathematical tools.{}\n\nWhen users ask mathematical questions that require calculations, you should use the appropriate tools. After using tools and receiving results, provide a clear answer to the user.", tools_description),
+        content: format!(
+            "You are Orbit, an advanced AI assistant with access to mathematical tools AND database tools.\n\
+            {}\n\n\
+            DATABASE CONTEXT:\n\
+            You have access to a chat application database with users, conversations, and messages.\n\
+            You can:\n\
+            - Search and summarize conversations\n\
+            - Send messages as any user\n\
+            - Find users and their conversations\n\
+            - Get conversation statistics\n\
+            \n\
+            When users ask about conversations, users, or messages, use the appropriate database tools.\n\
+            When users ask mathematical questions, use the mathematical tools.\n\
+            After using tools and receiving results, provide a clear, helpful answer to the user.",
+            tools_description
+        ),
     }]));
 
     let client = Client::new();
@@ -327,7 +360,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     });
 
-    println!("\x1b[1;34mChat-IBM WebSocket Server Running\x1b[0m");
+    println!("\x1b[1;34mOrbit AI Assistant Running\x1b[0m");
     println!("\x1b[1;34mPress Ctrl+C to stop\x1b[0m");
 
     // Keep running

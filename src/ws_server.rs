@@ -3,7 +3,8 @@ use axum::{
         ws::{Message, WebSocket, WebSocketUpgrade},
         State,
     },
-    response::{Html, IntoResponse},
+    response::{Html, IntoResponse, Response},
+    http::{StatusCode, header},
     routing::get,
     Router,
 };
@@ -11,7 +12,6 @@ use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use futures_util::{SinkExt, StreamExt};
 use tokio::sync::{broadcast, Mutex};
-use tower_http::services::ServeDir;
 
 #[derive(Clone)]
 pub struct WebSocketServer {
@@ -43,6 +43,8 @@ impl WebSocketServer {
 
         let app = Router::new()
             .route("/", get(serve_index))
+            .route("/styles.css", get(serve_css))
+            .route("/app.js", get(serve_js))
             .route("/ws", get(ws_handler))
             .with_state(app_state);
 
@@ -78,6 +80,22 @@ struct AppState {
 
 async fn serve_index() -> impl IntoResponse {
     Html(include_str!("../web/index.html"))
+}
+
+async fn serve_css() -> impl IntoResponse {
+    Response::builder()
+        .status(StatusCode::OK)
+        .header(header::CONTENT_TYPE, "text/css")
+        .body(include_str!("../web/styles.css").to_string())
+        .unwrap()
+}
+
+async fn serve_js() -> impl IntoResponse {
+    Response::builder()
+        .status(StatusCode::OK)
+        .header(header::CONTENT_TYPE, "application/javascript")
+        .body(include_str!("../web/app.js").to_string())
+        .unwrap()
 }
 
 async fn ws_handler(
